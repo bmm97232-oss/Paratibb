@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ramo Mágico Final 🌷✨</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@500;700&display=swap');
+  
+  body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: 'Quicksand', sans-serif; background: #000; }
+  
+  .fondo-coqueto { 
+    position: absolute; width: 100%; height: 100%; 
+    background: linear-gradient(to bottom, #0f0010 0%, #1a0005 40%, #000a1a 100%); 
+    z-index: -2; 
+  }
+  
+  #luna {
+    position: absolute; width: 40px; height: 40px; background: #fff8e1; border-radius: 50%;
+    box-shadow: 0 0 30px #ffecb3, 0 0 60px rgba(255, 236, 179, 0.3);
+    z-index: 1; pointer-events: none; transition: transform 3s ease;
+  }
+
+  .piropo-flotante {
+    position: absolute; color: #ffb3c1; font-family: 'Dancing Script', cursive;
+    font-size: 1.6rem; pointer-events: none; z-index: 200;
+    text-shadow: 0 0 10px rgba(255, 51, 119, 0.8);
+    animation: flotarYBorrar 2.2s forwards;
+  }
+
+  @keyframes flotarYBorrar {
+    0% { transform: translateY(0) scale(0.5); opacity: 0; }
+    20% { opacity: 1; transform: translateY(-25px) scale(1.1); }
+    100% { transform: translateY(-120px) scale(1); opacity: 0; }
+  }
+
+  #dedicatoria-final {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 85%; text-align: center; color: #fff; font-family: 'Dancing Script', cursive;
+    font-size: 2rem; opacity: 0; transition: 3s ease;
+    z-index: 60; background: rgba(0,0,0,0.85); padding: 35px;
+    border-radius: 40px; backdrop-filter: blur(20px); border: 1.5px solid #ff3377;
+    box-shadow: 0 0 50px rgba(255, 51, 119, 0.4); display: none;
+    line-height: 1.4;
+  }
+
+  #interfaz { 
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+    display: flex; flex-direction: column; align-items: center; z-index: 100; 
+  }
+  
+  .oculto { transform: translateY(120vh); opacity: 0; pointer-events: none; transition: 1.5s cubic-bezier(0.4, 0, 0.2, 1); }
+
+  h1 { font-family: 'Dancing Script', cursive; color: #ff3377; font-size: 2.5rem; margin-top: 40px; text-shadow: 0 0 15px rgba(255, 51, 119, 0.6); }
+  
+  #campoTexto { 
+    padding: 15px; width: 85%; max-width: 350px; border: 2px solid #ff3377; border-radius: 50px; 
+    font-size: 1.4rem; text-align: center; background: rgba(0, 0, 0, 0.8); color: #ffb3c1; outline: none;
+  }
+
+  #teclado { 
+    margin-top: auto; margin-bottom: 40px; background: rgba(20, 0, 5, 0.98); 
+    padding: 20px; border-radius: 30px; display: flex; flex-direction: column; 
+    gap: 10px; width: 94%; max-width: 550px; border: 1px solid #ff3377;
+  }
+  
+  .fila-teclado { display: flex; justify-content: center; gap: 6px; }
+  .tecla { 
+    width: 38px; height: 50px; background: #3d0016; color: #fff; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer;
+    box-shadow: 0 4px 0 #1a0008; transition: 0.1s; font-size: 1.2rem;
+  }
+  .tecla:active { transform: translateY(2px); box-shadow: 0 1px 0 #1a0008; background: #6b0025; }
+  .tecla.espacio { width: 120px; background: #ff3377; }
+  .tecla.borrar { width: 60px; background: #333; color: #ff3377; }
+  .btn-listo { width: 100px; background: #00ffcc; color: #000; font-size: 0.9rem; font-weight: 700; }
+
+  .particula-fuente { position: absolute; pointer-events: none; z-index: 40; font-size: 24px; }
+</style>
+</head>
+<body>
+
+<div id="luna"></div>
+<div class="fondo-coqueto"></div>
+
+<div id="interfaz">
+  <h1>Siembra tus palabras... 🌷</h1>
+  <input type="text" id="campoTexto" placeholder="..." readonly>
+  
+  <div id="teclado">
+    <div class="fila-teclado">
+      <div class="tecla">Q</div><div class="tecla">W</div><div class="tecla">E</div><div class="tecla">R</div><div class="tecla">T</div>
+      <div class="tecla">Y</div><div class="tecla">U</div><div class="tecla">I</div><div class="tecla">O</div><div class="tecla">P</div>
+    </div>
+    <div class="fila-teclado">
+      <div class="tecla">A</div><div class="tecla">S</div><div class="tecla">D</div><div class="tecla">F</div><div class="tecla">G</div>
+      <div class="tecla">H</div><div class="tecla">J</div><div class="tecla">K</div><div class="tecla">L</div><div class="tecla">Ñ</div>
+    </div>
+    <div class="fila-teclado">
+      <div class="tecla">Z</div><div class="tecla">X</div><div class="tecla">C</div><div class="tecla">V</div><div class="tecla">B</div>
+      <div class="tecla">N</div><div class="tecla">M</div>
+      <div class="tecla borrar" id="btn-borrar">⌫</div>
+    </div>
+    <div class="fila-teclado">
+      <div class="tecla espacio" id="btn-espacio">♥</div>
+      <div class="tecla btn-listo" id="btn-listo">LISTO</div>
+    </div>
+  </div>
+</div>
+
+<div id="dedicatoria-final"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.150.1/build/three.min.js"></script>
+
+<script>
+  const cajaTexto = document.getElementById('campoTexto');
+  const interfaz = document.getElementById('interfaz');
+  const panelDedicatoria = document.getElementById('dedicatoria-final');
+  const domLuna = document.getElementById('luna');
+  const listaFlores = [];
+  const piroposUsados = []; 
+  let fuenteActiva = false;
+  let tipoParticula = "estrella";
+
+  const frasesBonitas = [
+    "Eres muy bonita", "Eres especial", "Te quiero mucho", "Te adoro", 
+    "Eres mi estrella", "Eres única", "Me encantas", "Mi niña linda",
+    "Eres magia", "Qué hermosa eres", "Eres mi sueño", "Eres perfecta"
+  ];
+
+  function mostrarFraseFlotante() {
+    const frase = frasesBonitas[Math.floor(Math.random() * frasesBonitas.length)];
+    piroposUsados.push(frase); 
+    
+    const p = document.createElement('div');
+    p.className = 'piropo-flotante';
+    p.innerText = frase;
+    p.style.left = (window.innerWidth / 2 + (Math.random() - 0.5) * 220) + 'px';
+    p.style.top = (window.innerHeight / 2 + (Math.random() - 0.5) * 120) + 'px';
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 2200);
+  }
+
+  function crearParticulaFuente() {
+    if (!fuenteActiva) return;
+    const p = document.createElement('div');
+    p.className = 'particula-fuente';
+    p.innerText = tipoParticula === "mixto" ? (Math.random()>0.5?"⭐":"❤️") : (tipoParticula==="corazon"?"❤️":"⭐");
+    const cX = window.innerWidth / 2, cY = window.innerHeight * 0.65;
+    p.style.left = cX + 'px'; p.style.top = cY + 'px';
+    document.body.appendChild(p);
+    let vx = (Math.random()-0.5)*22, vy = -Math.random()*28-12, op = 1;
+    function mov() {
+      vy += 0.45; op -= 0.015;
+      p.style.left = parseFloat(p.style.left) + vx + 'px';
+      p.style.top = parseFloat(p.style.top) + vy + 'px';
+      p.style.opacity = op; p.style.transform = `scale(${op*1.6})`;
+      if(op > 0) requestAnimationFrame(mov); else p.remove();
+    }
+    mov();
+  }
+
+  function finalizar() {
+    const textoIngresado = cajaTexto.value.trim().toLowerCase();
+    interfaz.classList.add('oculto');
+    panelDedicatoria.style.display = "block";
+
+    // Lógica de los 3 niveles solicitados
+    const esNovios = (textoIngresado === "miau");
+    const esGusto = (textoIngresado === "tú y yo" || textoIngresado === "tu y yo" || textoIngresado === "yo y tú" || textoIngresado === "yo y tu");
+    const esLetraYLetra = /^[a-zñ] y [a-zñ]$/.test(textoIngresado);
+
+    if (esNovios) {
+      tipoParticula = "mixto"; 
+      fuenteActiva = true;
+      domLuna.style.transform = "scale(5) translate(-10%, 10%)";
+      panelDedicatoria.innerHTML = "¿Quieres ser mi novia? ❤️<br><br><span style='font-size:1.2rem; color:#ffb3c1;'>Conmigo siempre tendrás detalles así...</span>";
+    } else if (esGusto) {
+      tipoParticula = "corazon"; 
+      fuenteActiva = true;
+      panelDedicatoria.innerHTML = "Me gustas mucho... ✨🌷";
+    } else if (esLetraYLetra) {
+      tipoParticula = "estrella"; 
+      fuenteActiva = true;
+      panelDedicatoria.innerHTML = "Mejores amigos por siempre 🥰";
+    } else {
+      const unicos = [...new Set(piroposUsados)];
+      panelDedicatoria.innerHTML = unicos.length > 0 ? unicos.join(" • ") : "Para alguien muy especial 🌹";
+      fuenteActiva = false;
+    }
+
+    if(fuenteActiva) setInterval(crearParticulaFuente, 40);
+    setTimeout(() => { panelDedicatoria.style.opacity = "1"; grupoRamoTotal.position.y = 2; }, 1200);
+  }
+
+  // --- ESCENA THREE.JS ---
+  const escena = new THREE.Scene();
+  const camara = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 1000);
+  camara.position.set(0, 15, 90);
+  const renderizador = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderizador.setSize(window.innerWidth, window.innerHeight);
+  document.body.appendChild(renderizador.domElement);
+  escena.add(new THREE.AmbientLight(0xffffff, 1.4));
+
+  const grupoRamoTotal = new THREE.Group();
+  grupoRamoTotal.position.y = -5;
+  escena.add(grupoRamoTotal);
+  const grupoFlores = new THREE.Group();
+  grupoRamoTotal.add(grupoFlores);
+
+  function crearTulipan(idx) {
+    const contenedor = new THREE.Group();
+    const h = 22 + Math.sin(idx)*3;
+    const tallo = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.28, h), new THREE.MeshStandardMaterial({color: 0x0a3d1a}));
+    tallo.geometry.translate(0, h/2, 0);
+    contenedor.add(tallo);
+
+    const colores = [0xff1a75, 0xffd11a, 0xff661a, 0x1affd1, 0xffffff, 0xff85a2];
+    const cabeza = new THREE.Group(); cabeza.position.y = h; tallo.add(cabeza);
+    const matP = new THREE.MeshStandardMaterial({ color: colores[idx%6], emissive: colores[idx%6], emissiveIntensity: 0.5 });
+    for(let i=0; i<6; i++){
+      const p = new THREE.Mesh(new THREE.SphereGeometry(1.6, 16, 16, 0, Math.PI), matP);
+      p.scale.set(1.1, 2.8, 0.8); p.rotation.x = -Math.PI/2;
+      const eje = new THREE.Group(); eje.add(p);
+      eje.rotation.y = (i*Math.PI*2)/6; eje.position.y = 0.5;
+      cabeza.add(eje);
+    }
+    contenedor.rotation.x = Math.sin(idx*0.95)*0.25;
+    contenedor.rotation.z = Math.cos(idx*0.95)*0.25;
+    contenedor.userData = { fase: Math.random()*Math.PI*2, vel: 1.3 + Math.random()*0.5, amp: 0.18, rX: contenedor.rotation.x, rZ: contenedor.rotation.z };
+    contenedor.scale.set(0,0,0);
+    return contenedor;
+  }
+
+  document.querySelectorAll('.tecla').forEach(t => {
+    t.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      if(t.id==='btn-listo') finalizar();
+      else if(t.id==='btn-borrar') {
+        if(cajaTexto.value.length>0){
+          cajaTexto.value = cajaTexto.value.slice(0,-1);
+          const f = listaFlores.pop(); if(f) grupoFlores.remove(f);
+          piroposUsados.pop();
+        }
+      } else if(cajaTexto.value.length < 25) {
+        cajaTexto.value += (t.id==='btn-espacio'?' ':t.innerText);
+        const f = crearTulipan(listaFlores.length);
+        grupoFlores.add(f); listaFlores.push(f);
+        let s=0; const crecer = () => { if(s<1){ s+=0.12; f.scale.set(s,s,s); requestAnimationFrame(crecer); } }; crecer();
+        mostrarFraseFlotante();
+      }
+    });
+  });
+
+  function animate() {
+    requestAnimationFrame(animate);
+    const tiempo = Date.now() * 0.001;
+    grupoRamoTotal.rotation.y += 0.007;
+    listaFlores.forEach(f => {
+      const d = f.userData;
+      f.rotation.x = d.rX + Math.sin(tiempo * d.vel + d.fase) * d.amp;
+      f.rotation.z = d.rZ + Math.cos(tiempo * d.vel + d.fase) * d.amp;
+    });
+    const av = (tiempo * 0.03) % 1.4 - 0.2;
+    domLuna.style.left = (av * window.innerWidth) + "px";
+    domLuna.style.top = (Math.pow(av - 0.5, 2) * (window.innerHeight*0.8) + 60) + "px";
+    renderizador.render(escena, camara);
+  }
+  animate();
+</script>
+</body>
+</html>
